@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 # Get the capture device
-video = cv2.VideoCapture('stock.mp4');
+video = cv2.VideoCapture('stock.mp4')
 
 while(True):
     # Capture video

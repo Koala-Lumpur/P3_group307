@@ -2,12 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fc65279-44bb-4f8d-b999-91cea4da38d2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/stock.mp4" afterDir="false" />
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/PyGameExample.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lena.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wall.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/P3_group307.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/P3_group307.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BackgroundSubtraction.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackgroundSubtraction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EdgeDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/EdgeDetection.py" afterDir="false" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,58 +26,73 @@
     <session id="1903949944">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="4" />
+          <entry key="py" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="4" />
+          <entry key="Python" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1251" />
+          <entry key="dummy" value="13" />
+          <entry key="py" value="2558" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1251" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="2558" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="1531416698">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="16" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="16" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BackgroundSubtraction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="29" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="29" />
+<<<<<<< HEAD
+            <state relative-caret-position="510">
+              <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+=======
+            <state relative-caret-position="374">
+              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../Assignments/Filters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EdgeDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -88,14 +110,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+<<<<<<< HEAD
+            <state relative-caret-position="442">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+=======
+            <state>
+              <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/PyGameExample.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -115,9 +151,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Game.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/EdgeDetection.py" />
+        <option value="$PROJECT_DIR$/PyGameExmalpe.py" />
+        <option value="$PROJECT_DIR$/PyGameExample.py" />
         <option value="$PROJECT_DIR$/BackgroundSubtraction.py" />
+        <option value="$PROJECT_DIR$/Game.py" />
+=======
+        <option value="$PROJECT_DIR$/Game.py" />
+        <option value="$PROJECT_DIR$/BackgroundSubtraction.py" />
+        <option value="$PROJECT_DIR$/EdgeDetection.py" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
       </list>
     </option>
   </component>
@@ -132,6 +176,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -139,22 +184,31 @@
               <item name="P3_group307" type="b2602c69:ProjectViewProjectNode" />
               <item name="P3_group307" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
             <path>
               <item name="P3_group307" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignments" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="P3_group307" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ExerciseLecture3" type="462c0819:PsiDirectoryNode" />
+            </path>
+=======
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Assignments" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/ExerciseLecture3" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rasmus\Documents\GitHub\P3_group307" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Rasmus\Documents\GitHub\P3_group307" />
     </key>
@@ -171,7 +225,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.BackgroundSubtraction">
+  <component name="RunManager" selected="Python.Game">
     <configuration name="BackgroundSubtraction" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="P3_group307" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -235,16 +289,44 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="PyGameExample" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="P3_group307" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PyGameExample.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.EdgeDetection" />
       <item itemvalue="Python.BackgroundSubtraction" />
       <item itemvalue="Python.Game" />
+      <item itemvalue="Python.PyGameExample" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Game" />
+<<<<<<< HEAD
         <item itemvalue="Python.BackgroundSubtraction" />
         <item itemvalue="Python.EdgeDetection" />
-        <item itemvalue="Python.Game" />
+        <item itemvalue="Python.PyGameExample" />
+=======
+        <item itemvalue="Python.EdgeDetection" />
+        <item itemvalue="Python.BackgroundSubtraction" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
       </list>
     </recent_temporary>
   </component>
@@ -262,16 +344,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14436248" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14433551" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+=======
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32952183" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -288,42 +374,71 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Game.py">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/../Assignments/Filters.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PycharmProjects/ExerciseLecture3/threshold.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
+=======
+    <entry file="file://$PROJECT_DIR$/../Assignments/Filters.py" />
+    <entry file="file://$PROJECT_DIR$/BackgroundSubtraction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/EdgeDetection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Assignments/Filters.py">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/PyGameExample.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BackgroundSubtraction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="29" />
+        <state relative-caret-position="510">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+>>>>>>> d0ab273dce3bd8220a022fce0a6e30744312bd44
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
