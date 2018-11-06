@@ -3,6 +3,21 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+
+def generateVertices(x, y, z, w, h, d):
+    v = (
+        (x + w, y, z + d),
+        (x + w, y + h, z + d),
+        (x, y + h, z + d),
+        (x, y, z + d),
+        (x + w, y, z + d),
+        (x + w, y + h, z + d),
+        (x, y, z + d),
+        (x, y + h, z + d)
+    )
+    return v
+
+
 vertices = (
     (1, -1, 800),
     (1, 1, 800),
@@ -13,7 +28,7 @@ vertices = (
     (-1, -1, 1),
     (-1, 1, 1)
     )
-
+'''
 vertices2 = (
     (-0.5, -1, 190),
     (-0.5, 1, 190),
@@ -35,6 +50,27 @@ vertices3 = (
     (-1, -0.5, 180),
     (-1, 1, 180)
     )
+    
+vertices4 = (
+    (-1, -0.5, 170),
+    (1, -0.5, 170),
+    (1, -1, 170),
+    (-1, -1, 170),
+    (-1, -0.5, 170),
+    (-1, -0.5, 170),
+    (-1, -1, 170),
+    (-1, -1, 170)
+    )
+'''
+
+v1 = generateVertices(-1, -1, 550, 1, 2, 5)
+v2 = generateVertices(1, 1, 500, -1, -2, 5)
+v3 = generateVertices(-1, -1, 450, 2, 0.3, 5)
+v4 = generateVertices(1, 1, 400, -2, -0.65, 5)
+v5 = generateVertices(-1, -1, 350, 1, 2, 5)
+v6 = generateVertices(1, 1, 300, -1, -2, 5)
+v7 = generateVertices(-1, -1, 250, 2, 0.3, 5)
+v8 = generateVertices(1, 1, 200, -2, -0.65, 5)
 
 edges = (
     (0,1),
@@ -74,8 +110,43 @@ colors = (
     (0.5,0.5,0.5),
     (0,0,0),
     )
+'''
+ground_vertices = (
+    (-10, -1.1, 20),
+    (10, -1.1, 20),
+    (-10, -1.1, -300),
+    (10, -1.1, -300),
+)
 
+def ground():
+    glBegin(GL_QUADS)
+    for vertex in ground_vertices:
+        glColor3fv((0, 0.5, 0.5))
+        glVertex3fv(vertex)
+    glEnd()
 
+def set_vertices(max_distance):
+    x_value_change = random.randrange(-10, 10)
+    y_value_change = random.randrange(-10, 10)
+    z_value_change = random.randrange(-1*max_distance, -20)
+
+    new_vertices = []
+
+    for vert in vertices:
+        new_vert = []
+
+        new_x = vert[0] + x_value_change
+        new_y = vert[0] + y_value_change
+        new_z = vert[0] + z_value_change
+
+        new_vert.append(new_x)
+        new_vert.append(new_y)
+        new_vert.append(new_z)
+
+        new_vertices.append(new_vert)
+
+        return new_vertices
+'''
 def Cube(vertices):
     glBegin(GL_QUADS)
 
@@ -96,27 +167,41 @@ def Cube(vertices):
 
 
 def main():
+
     pygame.init()
     display = (1300,1000)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
 
-    glTranslatef(0.0,0.0, -200)
+    glTranslatef(0.0, 0.0, -600)
+    #i = 0
 
     while True:
+        '''
+        if(i % 5 == 0):
+            v1 = generateVertices(-1, -1, 190-i, 2, 2, 2)
+            print(i)
+        i += 0.5
+        '''
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
 
-        glTranslatef(0,0,0.05)
+        glTranslatef(0, 0, 0.1)
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         Cube(vertices)
-        Cube(vertices2)
-        Cube(vertices3)
+        Cube(v1)
+        Cube(v2)
+        Cube(v3)
+        Cube(v4)
+        Cube(v5)
+        Cube(v6)
+        Cube(v7)
+        Cube(v8)
+
         pygame.display.flip()
         pygame.time.wait(10)
-
 
 main()
