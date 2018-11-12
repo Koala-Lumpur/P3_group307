@@ -2,33 +2,47 @@ import numpy as np
 import cv2
 
 # Get the capture device
-video = cv2.VideoCapture('stock.mp4');
+video = cv2.VideoCapture(0);
 
-ret, firstframe = video.read()
-firstframe = cv2.flip(firstframe, 1)
+framecount = 50
 
-# Define the mask to be used for background subtraction
-sub = cv2.createBackgroundSubtractorMOG2()
+ret, frame = video.read()
+ref_image = frame
+w = frame.shape[0]
+h = frame.shape[1]
+d = frame.shape[2]
+back_frame = np.empty((framecount, w, h, d), dtype=frame.dtype)
 
-while (True):
+
+for i in range(framecount):
+    _, back_frame[i] = video.read()
+    ref_image = cv2.add(ref_image, back_frame[i])
+    print(i)
+
+ref_image = ref_image / framecount
+ref_image = cv2.flip(ref_image, 1)
+back_frame[0] = cv2.flip(back_frame[0], 1)
+
+while True:
     # Capture video
     ret, frame = video.read()
 
     # Flip video frame by frame
     frame = cv2.flip(frame, 1)
 
-    # Apply mask to video capture
-    bgmask = sub.apply(frame)
+    mask = cv2.subtract(back_frame[0], frame)
 
-    median = cv2.medianBlur(bgmask,5)
+    median = cv2.medianBlur(mask, 5)
 
-    diff = cv2.absdiff(firstframe, frame)
+    ret, thresh1 = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)
+    thresh1 = cv2.cvtColor(thresh1, cv2.COLOR_BGR2GRAY)
 
     # Show the video
-    #cv2.imshow('frame', frame)
-    cv2.imshow('Background sub', bgmask)
-    cv2.imshow('Median', median)
-    #cv2.imshow('Difference', diff)
+    cv2.imshow('frame', frame)
+    cv2.imshow('first frame', back_frame[0])
+    cv2.imshow('ref_image', ref_image)
+    cv2.imshow('mask', mask)
+    cv2.imshow('threshold', thresh1)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
