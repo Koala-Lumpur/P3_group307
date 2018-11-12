@@ -2,9 +2,11 @@ import numpy as np
 import cv2
 
 # Get the capture device
-video = cv2.VideoCapture('stock.mp4')
+video = cv2.VideoCapture(0)
 
-while(True):
+
+def main():
+
     # Capture video
     ret, frame = video.read()
 
@@ -16,10 +18,3 @@ while(True):
     # Show the video
     cv2.imshow('Frame', frame)
     cv2.imshow('Canny', canny)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-
-
-video.release()
-cv2.destroyAllWindows()

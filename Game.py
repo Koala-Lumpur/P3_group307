@@ -2,9 +2,13 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
+import random
+import EdgeDetection
+
+cubes = []
 
 
-def generateVertices(x, y, z, w, h, d):
+def generate_vertices(x, y, z, w, h, d):
     v = (
         (x + w, y, z + d),
         (x + w, y + h, z + d),
@@ -63,14 +67,14 @@ vertices4 = (
     )
 '''
 
-v1 = generateVertices(-1, -1, 550, 1, 2, 5)
-v2 = generateVertices(1, 1, 500, -1, -2, 5)
-v3 = generateVertices(-1, -1, 450, 2, 0.3, 5)
-v4 = generateVertices(1, 1, 400, -2, -0.65, 5)
-v5 = generateVertices(-1, -1, 350, 1, 2, 5)
-v6 = generateVertices(1, 1, 300, -1, -2, 5)
-v7 = generateVertices(-1, -1, 250, 2, 0.3, 5)
-v8 = generateVertices(1, 1, 200, -2, -0.65, 5)
+#v1 = generateVertices(-1, -1, 550, 1, 2, 5)
+#v2 = generateVertices(1, 1, 500, -1, -2, 5)
+#v3 = generateVertices(-1, -1, 450, 2, 0.3, 5)
+#v4 = generateVertices(1, 1, 400, -2, -0.65, 5)
+#v5 = generateVertices(-1, -1, 350, 1, 2, 5)
+#v6 = generateVertices(1, 1, 300, -1, -2, 5)
+#v7 = generateVertices(-1, -1, 250, 2, 0.3, 5)
+#v8 = generateVertices(1, 1, 200, -2, -0.65, 5)
 
 edges = (
     (0,1),
@@ -147,7 +151,9 @@ def set_vertices(max_distance):
 
         return new_vertices
 '''
-def Cube(vertices):
+
+
+def cube(vertices):
     glBegin(GL_QUADS)
 
     for surface in surfaces:
@@ -168,16 +174,33 @@ def Cube(vertices):
 
 def main():
 
+    number_of_cubes = 0
+    generated = False
     pygame.init()
     display = (1800,1000)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
 
-    glTranslatef(0.0, 0.0, -600)
-    #i = 0
+    glTranslate(0, 0, -600)
+
+    for i in range(600, 0, -25):
+        rand = random.randint(0, 3)
+        last_rand = rand
+        print(number_of_cubes)
+        print(rand)
+        if rand == 0:
+            cubes.append(generate_vertices(-1, -1, i, 1, 2, 5))
+        if rand == 1:
+            cubes.append(generate_vertices(1, 1, i, -1, -2, 5))
+        if rand == 2:
+            cubes.append(generate_vertices(-1, -1, i, 2, 0.3, 5))
+        if rand == 3:
+            cubes.append(generate_vertices(1, 1, i, -2, -0.80, 5))
+        number_of_cubes += 1
 
     while True:
+        EdgeDetection.main()
         '''
         if(i % 5 == 0):
             v1 = generateVertices(-1, -1, 190-i, 2, 2, 2)
@@ -189,17 +212,13 @@ def main():
                 pygame.quit()
                 quit()
 
-        glTranslatef(0, 0, 0.1)
+        glTranslate(0, 0, 1)
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-        Cube(vertices)
-        Cube(v1)
-        Cube(v2)
-        Cube(v3)
-        Cube(v4)
-        Cube(v5)
-        Cube(v6)
-        Cube(v7)
-        Cube(v8)
+
+        cube(vertices)
+
+        for i in range(0, number_of_cubes):
+            cube(cubes[i])
 
         pygame.display.flip()
         pygame.time.wait(10)
