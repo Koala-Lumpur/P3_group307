@@ -4,6 +4,8 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 import random
 import EdgeDetection
+import cv2
+import numpy
 
 cubes = []
 
@@ -171,19 +173,32 @@ def cube(vertices):
             glVertex3fv(vertices[vertex])
     glEnd()
 
+def wall(image):
+
+    glBegin(GL_QUADS)
+    glTexCoord2f(0,0)
+    glVertex3f(-10,-10,-16)
+    glTexCoord2f(0,1)
+    glVertex3f(-10,10,-16)
+    glTexCoord2f(1,1)
+    glVertex3f(10,10,-16)
+    glTexCoord2f(1,0)
+    glVertex3f(10,-10,-16)
+    glEnd()
 
 def main():
-
+    print("G-0")
     number_of_cubes = 0
     generated = False
     pygame.init()
-    display = (1800,1000)
-    pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    display = (1800, 1000)
+    screen = pygame.display.set_mode(display, DOUBLEBUF | OPENGL | pygame.OPENGLBLIT)
+    print("G-1")
+    # gluPerspective(45, 1, 0.05, 100)
+    gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
 
-    gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
-
-    glTranslate(0, 0, -600)
-
+    glTranslate(0, 0, -25)
+    print("G-2")
     for i in range(600, 0, -25):
         rand = random.randint(0, 3)
         last_rand = rand
@@ -198,9 +213,16 @@ def main():
         if rand == 3:
             cubes.append(generate_vertices(1, 1, i, -2, -0.80, 5))
         number_of_cubes += 1
+    #print("G-3")
 
     while True:
-        EdgeDetection.main()
+        edges = EdgeDetection.main()
+        edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
+        _, alpha = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY)
+        b, g, r = cv2.split(edges)
+        edgesOnly = [b, g, r, alpha]
+        img = pygame.surfarray.make_surface(edges)
+        #img = pygame.Surface(img.get_size(), pygame.SRCALPHA, 32)
         '''
         if(i % 5 == 0):
             v1 = generateVertices(-1, -1, 190-i, 2, 2, 2)
@@ -211,14 +233,42 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-
+        #print("G-4")
         glTranslate(0, 0, 1)
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
+
+        # Load image -- Important to load/generate the edge detection image before clearing the buffer!
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
+        #img = pygame.image.load("Rasmus101.png")
+        width = img.get_width()
+        height = img.get_height()
+        textureData = pygame.image.tostring(img, "RGBA", 1)
+
+        im = glGenTextures(1)
+
+        glBindTexture(GL_TEXTURE_2D, im)
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                     textureData)  # Change the first integer to 1 to hide the image while the image doesn't have transparency, and 0 to show the image
+
+        glEnable(GL_TEXTURE_2D)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        glEnable(GL_BLEND)
+
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        # Draw the scene
+        wall(im)
         cube(vertices)
-
+        #print("G-5")
         for i in range(0, number_of_cubes):
             cube(cubes[i])
+        #print("G-6")
+
+        # Display image (note: random method name) -- change location in the method
+        wall(im)
 
         pygame.display.flip()
         pygame.time.wait(10)

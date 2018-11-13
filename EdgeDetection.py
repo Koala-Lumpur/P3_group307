@@ -18,3 +18,5 @@ def main():
     # Show the video
     cv2.imshow('Frame', frame)
     cv2.imshow('Canny', canny)
+
+    return canny
