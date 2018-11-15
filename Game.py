@@ -197,7 +197,7 @@ def main():
     # gluPerspective(45, 1, 0.05, 100)
     gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
 
-    glTranslate(0, 0, -25)
+    glTranslate(0, 0, -600)
     print("G-2")
     for i in range(600, 0, -25):
         rand = random.randint(0, 3)
@@ -223,20 +223,15 @@ def main():
         edgesOnly = [b, g, r, alpha]
         img = pygame.surfarray.make_surface(edges)
         #img = pygame.Surface(img.get_size(), pygame.SRCALPHA, 32)
-        '''
-        if(i % 5 == 0):
-            v1 = generateVertices(-1, -1, 190-i, 2, 2, 2)
-            print(i)
-        i += 0.5
-        '''
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        #print("G-4")
+
         glTranslate(0, 0, 1)
 
-
+        '''
         # Load image -- Important to load/generate the edge detection image before clearing the buffer!
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
         #img = pygame.image.load("Rasmus101.png")
@@ -253,14 +248,17 @@ def main():
                      textureData)  # Change the first integer to 1 to hide the image while the image doesn't have transparency, and 0 to show the image
 
         glEnable(GL_TEXTURE_2D)
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
         glEnable(GL_BLEND)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        '''
 
+        glEnable(GL_DEPTH_TEST)
+        glDepthFunc(GL_LEQUAL)
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         # Draw the scene
-        wall(im)
+        #wall(im)
         cube(vertices)
         #print("G-5")
         for i in range(0, number_of_cubes):
@@ -268,7 +266,7 @@ def main():
         #print("G-6")
 
         # Display image (note: random method name) -- change location in the method
-        wall(im)
+        #wall(im)
 
         pygame.display.flip()
         pygame.time.wait(10)

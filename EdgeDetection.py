@@ -13,10 +13,8 @@ def main():
     # Flip video frame by frame
     frame = cv2.flip(frame, 1)
 
-    canny = cv2.Canny(frame, 50, 128)
+    frame = np.rot90(frame)
 
-    # Show the video
-    cv2.imshow('Frame', frame)
-    cv2.imshow('Canny', canny)
+    canny = cv2.Canny(frame, 50, 128)
 
     return canny
