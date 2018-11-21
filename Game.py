@@ -173,9 +173,11 @@ def cube(vertices):
             glVertex3fv(vertices[vertex])
     glEnd()
 
-def wall(image):
+def wall(image, alpha):
 
     glBegin(GL_QUADS)
+    if alpha:
+        glColor4f(1.0, 1.0, 1.0, 1.0)
     glTexCoord2f(0,0)
     glVertex3f(-10,-10,-16)
     glTexCoord2f(0,1)
@@ -197,7 +199,7 @@ def main():
     # gluPerspective(45, 1, 0.05, 100)
     gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
 
-    glTranslate(0, 0, -600)
+    glTranslate(0, 0, -25)
     print("G-2")
     for i in range(600, 0, -25):
         rand = random.randint(0, 3)
@@ -217,12 +219,14 @@ def main():
 
     while True:
         edges = EdgeDetection.main()
-        edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
-        _, alpha = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY)
-        b, g, r = cv2.split(edges)
-        edgesOnly = [b, g, r, alpha]
+        #edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
+        _, alpha = cv2.threshold(edges, 0, 1, cv2.THRESH_BINARY)
+        #b, g, r = cv2.split(edges)
+        #edges_only = [b, g, r, alpha]
         img = pygame.surfarray.make_surface(edges)
-        #img = pygame.Surface(img.get_size(), pygame.SRCALPHA, 32)
+        #img.convert_alpha()
+        #img.set_alpha(0)
+        #img = pygame.Surface(img.get_size(), pygame.SRCALPHA)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -231,7 +235,7 @@ def main():
 
         glTranslate(0, 0, 1)
 
-        '''
+
         # Load image -- Important to load/generate the edge detection image before clearing the buffer!
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1)
         #img = pygame.image.load("Rasmus101.png")
@@ -244,21 +248,24 @@ def main():
         glBindTexture(GL_TEXTURE_2D, im)
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
                      textureData)  # Change the first integer to 1 to hide the image while the image doesn't have transparency, and 0 to show the image
 
         glEnable(GL_TEXTURE_2D)
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-        '''
+
 
         glEnable(GL_DEPTH_TEST)
         glDepthFunc(GL_LEQUAL)
 
+        #glEnable(GL_ALPHA_TEST);
+        #glAlphaFunc(GL_GREATER, 0);
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         # Draw the scene
-        #wall(im)
+        wall(im, True)
         cube(vertices)
         #print("G-5")
         for i in range(0, number_of_cubes):

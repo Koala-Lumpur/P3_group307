@@ -11,7 +11,7 @@ def main():
     ret, frame = video.read()
 
     # Flip video frame by frame
-    frame = cv2.flip(frame, 1)
+    #frame = cv2.flip(frame, 1)
 
     frame = np.rot90(frame)
 
