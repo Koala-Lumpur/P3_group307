@@ -1,5 +1,6 @@
 import pygame
-import EdgeDetection
+import edge_detection as ed
+import background_subtraction as bs
 import cv2
 
 SCREEN_WIDTH = 1920
@@ -39,7 +40,7 @@ while True:
     new_wall_pos_y -= 0.25
     x += 1
     y += 1
-    frame = EdgeDetection.main()
+    frame = bs.main()
     frame = pygame.surfarray.make_surface(frame)
     frame_x = frame.get_width()
     frame_y = frame.get_height()

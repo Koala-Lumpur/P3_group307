@@ -3,7 +3,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 import random
-import EdgeDetection
+import edge_detection
 import cv2
 import numpy
 
@@ -218,7 +218,7 @@ def main():
     #print("G-3")
 
     while True:
-        edges = EdgeDetection.main()
+        edges = edge_detection.main()
         #edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
         _, alpha = cv2.threshold(edges, 0, 1, cv2.THRESH_BINARY)
         #b, g, r = cv2.split(edges)
