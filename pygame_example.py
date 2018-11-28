@@ -1,20 +1,21 @@
 import pygame
+import numpy as np
 import edge_detection as ed
 import background_subtraction as bs
 import cv2
+import time
+import wall
 
 SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 BLACK = (0,0,0)
 WHITE = (255,255,255)
-wall_pos_x = 917
-wall_pos_y = 497
-new_wall_pos_x = wall_pos_x
-new_wall_pos_y = wall_pos_y
-x = 87
-y = 86
-
-
+walls = [wall.Wall() for i in range(10)]
+pygame.font.init()
+font = pygame.font.Font(None, 30)
+clock = pygame.time.Clock()
+last_frame = pygame.time.get_ticks()
+speed_multiplier = 1
 
 pygame.init()
 
@@ -27,6 +28,8 @@ wall = pygame.image.load("wall.jpeg")
 #wall = pygame.transform.scale(wall, (wall.get_width()/3, wall.get_height()/3))
 
 while True:
+    clock.tick(20)
+    start = pygame.time.get_ticks()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             break
@@ -34,12 +37,17 @@ while True:
         if event.key == pygame.K_ESCAPE:
             break
     screen.blit(background, [0, 0])
-    #screen.blit(wall, (new_wall_pos_x, new_wall_pos_y))
-    #wall = pygame.transform.scale(wall, (x, y))
-    new_wall_pos_x -= 0.75
-    new_wall_pos_y -= 0.25
-    x += 1
-    y += 1
+    screen.blit(wall, (walls[0].new_wall_pos_x, walls[0].new_wall_pos_y))
+    wall = pygame.transform.smoothscale(wall, (int(walls[0].x), int(walls[0].y)))
+    delta = (start - last_frame) / 1000
+    last_frame = start
+    walls[0].new_wall_pos_x -= 8.8 * delta * speed_multiplier
+    walls[0].new_wall_pos_y -= 4.7 * delta * speed_multiplier
+    walls[0].x += 18.5 * delta * speed_multiplier
+    walls[0].y += 10 * delta * speed_multiplier
+    speed_multiplier += 1
+
+    '''
     frame = bs.main()
     frame = pygame.surfarray.make_surface(frame)
     frame_x = frame.get_width()
@@ -48,6 +56,9 @@ while True:
     frame.set_alpha(128)
     frame.set_colorkey((0, 0, 0))
     screen.blit(frame, (SCREEN_WIDTH/2 - frame_x/2, SCREEN_HEIGHT/2))
+    '''
+    fps = font.render(str(int(clock.get_fps())), True, pygame.Color('white'))
+    screen.blit(fps, (50, 50))
     pygame.display.update()
 
 pygame.quit()
