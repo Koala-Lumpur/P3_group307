@@ -90,7 +90,7 @@ while True:
         start_game("Press space to continue to the game", True)
     else:
         # Setting the max FPS
-        clock.tick(60)
+        clock.tick(30)
         # Returns the time in milliseconds since pygame was initialized
         start = pygame.time.get_ticks()
         # The blit function is called on the screen object
@@ -131,7 +131,7 @@ while True:
         frame_y = frame.get_height()
         frame.set_colorkey((0, 0, 0))
         mask_ed = pygame.mask.from_surface(frame)
-        screen.blit(frame, (SCREEN_WIDTH / 2 - frame_x / 2, SCREEN_HEIGHT / 2))
+        screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, SCREEN_HEIGHT / 2))
 
         # Rendering the FPS text
         fps = font.render(str(int(clock.get_fps())), False, pygame.Color('white'))

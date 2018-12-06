@@ -31,6 +31,7 @@ class BackSub:
         mask = cv2.subtract(back_frame, frame)
         ret, thresh1 = cv2.threshold(mask, 25, 255, cv2.THRESH_BINARY)
         #thresh1 = cv2.cvtColor(thresh1, cv2.COLOR_BGR2GRAY)
+        thresh1 = cv2.medianBlur(thresh1, 9)
 
         return thresh1
 
