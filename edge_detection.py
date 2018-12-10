@@ -17,6 +17,6 @@ def main():
 
     canny = cv2.Canny(frame, 50, 128)
 
-    canny = cv2.medianBlur(canny, 9)
+    #canny = cv2.medianBlur(canny, 1)
 
     return canny
