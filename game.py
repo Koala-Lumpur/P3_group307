@@ -204,7 +204,7 @@ while True:
         else:
             obs_avoided += 1
 
-    frame = ed.main()
+    frame = bs_class.camera_output()
     frame = pygame.surfarray.make_surface(frame)
     frame.convert_alpha()
     frame_x = frame.get_width()

@@ -35,6 +35,13 @@ class BackSub:
 
         return thresh1
 
+    def camera_output(self):
+        ret, frame = BackSub.video.read()
+        frame = np.rot90(frame)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+        return frame
+
     '''
     while True:
         cv2.imshow('meh', main())
