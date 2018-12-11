@@ -122,10 +122,10 @@ while True:
         # Jump
         walls[obstacle_number].new_wall_pos_y += 80
         walls[obstacle_number].y -= 80
-        pos_changey = -3
-        pos_changex += 1
-        scale_changex += 2
-        scale_changey /= 3
+        pos_changey = -5
+        pos_changex += 2
+        scale_changex += 4
+        scale_changey /= 5
         obs_changed = True
     elif obstacle_number == 4 and not obs_changed:
         # Crouch
@@ -143,10 +143,10 @@ while True:
         # Jump
         walls[obstacle_number].new_wall_pos_y += 80
         walls[obstacle_number].y -= 80
-        pos_changey = -3
-        pos_changex += 1
-        scale_changex += 2
-        scale_changey /= 3
+        pos_changey = -5
+        pos_changex += 2
+        scale_changex += 4
+        scale_changey /= 5
         obs_changed = True
     elif obstacle_number == 7 and not obs_changed:
         # Left
@@ -204,14 +204,15 @@ while True:
         else:
             obs_avoided += 1
 
-    frame = bs_class.camera_output()
+    frame = ed.main()
     frame = pygame.surfarray.make_surface(frame)
     frame.convert_alpha()
+    #frame = pygame.transform.smoothscale(frame, (1500, 1100))
     frame_x = frame.get_width()
     frame_y = frame.get_height()
     frame.set_colorkey((0, 0, 0))
     mask_ed = pygame.mask.from_surface(frame)
-    screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, SCREEN_HEIGHT / 2))
+    screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, (SCREEN_HEIGHT - frame_y) /2 + 50))
 
     # Rendering the FPS text
     fps = font.render(str(int(clock.get_fps())), False, pygame.Color('white'))
