@@ -15,6 +15,8 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 BLACK = (0,0,0)
 WHITE = (255,255,255)
+frame = 0
+frame_limit = 60
 # An array - inside the [] we call the wall constructor in the Wall class (x, y pos and x, y scale for each wall)
 # The for loop makes it called 11 times and adds it to the array
 walls = [wall.Wall() for i in range(10)]
@@ -33,10 +35,10 @@ pos_changey = 5.2
 scale_changex = 18.8
 scale_changey = 10.4
 '''
-pos_changex = 2.5
-pos_changey = 1.4
-scale_changex = 2.5
-scale_changey = 3
+pos_changex = 2.8/5
+pos_changey = 1.6/5
+scale_changex = 5.5/5
+scale_changey = 3.2/5
 obs_changed = False
 num_obs_hit = 0
 obs_hit = False
@@ -99,84 +101,84 @@ while True:
     screen.blit(background, [0, 0])
     screen.blit(line, [line_x, line_y])
     # Returns the time in milliseconds since pygame was initialized
+    '''
     start = pygame.time.get_ticks()
     # Calculating delta time
     delta_time = (start - last_frame) / 1000
     # Changing last frame to the actual last frame, so we can calculate again in the next frame
     last_frame = start
     # if statement that makes the walls disappearing after they reach a certain position
+    '''
 
     if obstacle_number == 0 and not obs_changed:
         # Left
         walls[obstacle_number].x -= 70
-        #pos_changex = 9.2
-        #scale_changex /= 2
+        scale_changex /= 2
         obs_changed = True
         first_obstacle = pygame.time.get_ticks() + 500
     elif obstacle_number == 1 and not obs_changed:
         # Right
         walls[obstacle_number].new_wall_pos_x += 70
         walls[obstacle_number].x -= 70
-        pos_changex = -1
+        pos_changex = - 0.07
         scale_changex /= 2
         obs_changed = True
     elif obstacle_number == 2 and not obs_changed:
         # Crouch
         walls[obstacle_number].y -= 70
-        scale_changey /= 2.5
+        scale_changey /= 3.5
         obs_changed = True
     elif obstacle_number == 3 and not obs_changed:
         # Jump
         walls[obstacle_number].new_wall_pos_y += 80
         walls[obstacle_number].y -= 80
-        pos_changey = -5
-        pos_changex += 2
-        scale_changex += 4
+        pos_changey -= 0.5
+        pos_changex += 0.01
+        scale_changex += 0.05
         scale_changey /= 5
         obs_changed = True
     elif obstacle_number == 4 and not obs_changed:
         # Crouch
         walls[obstacle_number].y -= 70
-        scale_changey /= 2.5
+        scale_changey /= 3.5
         obs_changed = True
     elif obstacle_number == 5 and not obs_changed:
         # Right
         walls[obstacle_number].new_wall_pos_x += 70
         walls[obstacle_number].x -= 70
-        pos_changex = -1
+        pos_changex = - 0.07
         scale_changex /= 2
         obs_changed = True
     elif obstacle_number == 6 and not obs_changed:
         # Jump
         walls[obstacle_number].new_wall_pos_y += 80
         walls[obstacle_number].y -= 80
-        pos_changey = -5
-        pos_changex += 2
-        scale_changex += 4
-        scale_changey /= 5
+        pos_changey = -0.3
+        pos_changex += 0.3
+        scale_changex += 0.6
+        scale_changey /= 3
         obs_changed = True
     elif obstacle_number == 7 and not obs_changed:
         # Left
         walls[obstacle_number].x -= 70
-        pos_changex = 9.2
         scale_changex /= 2
         obs_changed = True
     elif obstacle_number == 8 and not obs_changed:
         # Crouch
         walls[obstacle_number].y -= 70
-        scale_changey /= 2.5
+        scale_changey /= 3.5
         obs_changed = True
     elif obstacle_number == 9 and not obs_changed:
         # Right
         walls[obstacle_number].new_wall_pos_x += 70
         walls[obstacle_number].x -= 70
-        pos_changex = -1
+        pos_changex = - 0.07
         scale_changex /= 2
         obs_changed = True
 
     new_obstacle = pygame.time.get_ticks() - first_obstacle
 
-    if new_obstacle - time_limit <= 0:
+    if frame - frame_limit <= 0:
         screen.blit(wall, (walls[obstacle_number].new_wall_pos_x, walls[obstacle_number].new_wall_pos_y))
         wall = pygame.transform.scale(wall, (int(walls[obstacle_number].x), int(walls[obstacle_number].y)))
         walls[obstacle_number].new_wall_pos_x -= int((pos_changex * speed_multiplier))
@@ -201,17 +203,19 @@ while True:
     else:
         obstacle_number += 1
         speed_multiplier = 1
-        time_limit += 2500
+        frame_limit += 60
         obs_changed = False
-        #pos_changex = 9.2
-        #pos_changey = 5.2
-        #scale_changex = 18.8
-        #scale_changey = 10.4
+        pos_changex = 2.7 / 5
+        pos_changey = 1.4 / 5
+        scale_changex = 5.5 / 5
+        scale_changey = 3 / 5
         if obs_hit:
             num_obs_hit += 1
             obs_hit = False
         else:
             obs_avoided += 1
+
+    frame += 1
 
     '''
     frame = ed_class.main()
