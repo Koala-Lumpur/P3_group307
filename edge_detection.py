@@ -1,26 +1,36 @@
 import numpy as np
 import cv2
-
-# Get the capture device
-video = cv2.VideoCapture(0)
-video.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-video.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+import pygame
 
 
-def main():
 
-    # Capture video
-    ret, frame = video.read()
+class EdgeDetect:
+    video = cv2.VideoCapture('res\Test Peter high light no hit.mp4')
+    frame_no = 375
+    last_frame = pygame.time.get_ticks()
 
-    frame = frame[0:700, 50:1200]
+    video.set(1, 375)
 
-    # Flip video frame by frame
-    #frame = cv2.flip(frame, 1)
+    def main(self):
+        '''
+        start = pygame.time.get_ticks()
+        delta_time = (start - EdgeDetect.last_frame) / 50
+        EdgeDetect.last_frame = start
+        EdgeDetect.frame_no = EdgeDetect.frame_no + delta_time
+        EdgeDetect.video.set(1, EdgeDetect.frame_no)
+        '''
 
-    frame = np.rot90(frame)
+        ret, frame = EdgeDetect.video.read()
 
-    canny = cv2.Canny(frame, 50, 128)
+        frame = frame[0:700, 50:1200]
 
-    #canny = cv2.medianBlur(canny, 1)
+        # Flip video frame by frame
+        #frame = cv2.flip(frame, 1)
 
-    return canny
+        frame = np.rot90(frame)
+
+        canny = cv2.Canny(frame, 50, 128)
+
+        #canny = cv2.medianBlur(canny, 1)
+
+        return canny

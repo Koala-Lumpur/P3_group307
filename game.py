@@ -8,6 +8,7 @@ import threading
 import wall
 
 bs_class = bs.BackSub()
+ed_class = ed.EdgeDetect()
 space_held = False
 game_screen = 0
 SCREEN_WIDTH = 1920
@@ -26,10 +27,16 @@ font = pygame.font.Font(None, 30)
 clock = pygame.time.Clock()
 # Returns the number (in miliseconds) since pygame.init was called (before it's initialized it is zero)
 last_frame = pygame.time.get_ticks()
+'''
 pos_changex = 9.2
 pos_changey = 5.2
 scale_changex = 18.8
 scale_changey = 10.4
+'''
+pos_changex = 2.5
+pos_changey = 1.4
+scale_changex = 2.5
+scale_changey = 3
 obs_changed = False
 num_obs_hit = 0
 obs_hit = False
@@ -84,7 +91,7 @@ while True:
             break
 
     # Setting the max FPS
-    clock.tick(30)
+    dt = clock.tick(30)
     # The blit function is called on the screen object
     # (first parameter - what we want blited, second parameter - pixel pos)
     # Blitting is putting something on the screen - in this case we are visualizing the background
@@ -102,8 +109,8 @@ while True:
     if obstacle_number == 0 and not obs_changed:
         # Left
         walls[obstacle_number].x -= 70
-        pos_changex = 9.2
-        scale_changex /= 2
+        #pos_changex = 9.2
+        #scale_changex /= 2
         obs_changed = True
         first_obstacle = pygame.time.get_ticks() + 500
     elif obstacle_number == 1 and not obs_changed:
@@ -172,12 +179,13 @@ while True:
     if new_obstacle - time_limit <= 0:
         screen.blit(wall, (walls[obstacle_number].new_wall_pos_x, walls[obstacle_number].new_wall_pos_y))
         wall = pygame.transform.scale(wall, (int(walls[obstacle_number].x), int(walls[obstacle_number].y)))
-        walls[obstacle_number].new_wall_pos_x -= int((pos_changex * delta_time) * speed_multiplier)
-        walls[obstacle_number].new_wall_pos_y -= int((pos_changey * delta_time) * speed_multiplier)
-        walls[obstacle_number].x += int((scale_changex * delta_time) * speed_multiplier)
-        walls[obstacle_number].y += int((scale_changey * delta_time) * speed_multiplier)
+        walls[obstacle_number].new_wall_pos_x -= int((pos_changex * speed_multiplier))
+        walls[obstacle_number].new_wall_pos_y -= int((pos_changey * speed_multiplier))
+        walls[obstacle_number].x += int((scale_changex * speed_multiplier))
+        walls[obstacle_number].y += int((scale_changey * speed_multiplier))
         speed_multiplier += 1
         if walls[obstacle_number].new_wall_pos_y + walls[obstacle_number].y > line_y:
+            '''
             wall_rect = wall.get_rect(center=(0, 0))
             frame_rect = frame.get_rect(center=(0, 0))
             wall_mask = pygame.mask.from_surface(wall)
@@ -189,22 +197,24 @@ while True:
             if hit:
                 obs_hit = True
                 print("hit")
+                '''
     else:
         obstacle_number += 1
         speed_multiplier = 1
         time_limit += 2500
         obs_changed = False
-        pos_changex = 9.2
-        pos_changey = 5.2
-        scale_changex = 18.8
-        scale_changey = 10.4
+        #pos_changex = 9.2
+        #pos_changey = 5.2
+        #scale_changex = 18.8
+        #scale_changey = 10.4
         if obs_hit:
             num_obs_hit += 1
             obs_hit = False
         else:
             obs_avoided += 1
 
-    frame = ed.main()
+    '''
+    frame = ed_class.main()
     frame = pygame.surfarray.make_surface(frame)
     frame.convert_alpha()
     #frame = pygame.transform.smoothscale(frame, (1500, 1100))
@@ -213,6 +223,7 @@ while True:
     frame.set_colorkey((0, 0, 0))
     mask_ed = pygame.mask.from_surface(frame)
     screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, (SCREEN_HEIGHT - frame_y) /2 + 50))
+    '''
 
     # Rendering the FPS text
     fps = font.render(str(int(clock.get_fps())), False, pygame.Color('white'))
