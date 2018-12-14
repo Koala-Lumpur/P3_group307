@@ -15,7 +15,7 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1080
 BLACK = (0,0,0)
 WHITE = (255,255,255)
-frame = 0
+frame_no = 0
 frame_limit = 60
 # An array - inside the [] we call the wall constructor in the Wall class (x, y pos and x, y scale for each wall)
 # The for loop makes it called 11 times and adds it to the array
@@ -176,9 +176,9 @@ while True:
         scale_changex /= 2
         obs_changed = True
 
-    new_obstacle = pygame.time.get_ticks() - first_obstacle
+    #new_obstacle = pygame.time.get_ticks() - first_obstacle
 
-    if frame - frame_limit <= 0:
+    if frame_no - frame_limit <= 0:
         screen.blit(wall, (walls[obstacle_number].new_wall_pos_x, walls[obstacle_number].new_wall_pos_y))
         wall = pygame.transform.scale(wall, (int(walls[obstacle_number].x), int(walls[obstacle_number].y)))
         walls[obstacle_number].new_wall_pos_x -= int((pos_changex * speed_multiplier))
@@ -215,10 +215,10 @@ while True:
         else:
             obs_avoided += 1
 
-    frame += 1
+    frame_no += 1
 
-    '''
-    frame = ed_class.main()
+
+    frame = bs_class.main()
     frame = pygame.surfarray.make_surface(frame)
     frame.convert_alpha()
     #frame = pygame.transform.smoothscale(frame, (1500, 1100))
@@ -226,8 +226,8 @@ while True:
     frame_y = frame.get_height()
     frame.set_colorkey((0, 0, 0))
     mask_ed = pygame.mask.from_surface(frame)
-    screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, (SCREEN_HEIGHT - frame_y) /2 + 50))
-    '''
+    screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, (SCREEN_HEIGHT - frame_y) / 2 + 50))
+
 
     # Rendering the FPS text
     fps = font.render(str(int(clock.get_fps())), False, pygame.Color('white'))
