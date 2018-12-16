@@ -17,13 +17,16 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 frame_no = 0
 frame_limit = 60
+total_fps = 0
+done = False
+frame_pos = (int((SCREEN_WIDTH - 1280) / 2), int((SCREEN_HEIGHT - 720) /2 + 50))
 # An array - inside the [] we call the wall constructor in the Wall class (x, y pos and x, y scale for each wall)
 # The for loop makes it called 11 times and adds it to the array
 walls = [wall.Wall() for i in range(10)]
 # Initializing pygame's font, so we can display the FPS (necessary for displaying any text)
 pygame.font.init()
 # Defining a new font object (first constructor the font type, None = pygame default font, second is the font size = 100)
-initial_font = pygame.font.Font(None, 100)
+end_font = pygame.font.Font(None, 100)
 font = pygame.font.Font(None, 30)
 # Used for limiting and getting the FPS
 clock = pygame.time.Clock()
@@ -64,7 +67,7 @@ pygame.display.set_caption('Obstacle Course simulator 2018')
 # Loading the background image -
 # .convert() creates a new copy of the surface with the pixel format changed (it boosts FPS)
 background = pygame.image.load("background.jpg").convert()
-wall = pygame.image.load("Obstacle.png").convert()
+wall = pygame.image.load("Obstacle.png").convert_alpha()
 line = pygame.image.load("line.png").convert_alpha()
 # mask.from_surface is a pygame method - sorts out all the transparent pixels
 # We can use collision that ignores transparent pixels
@@ -93,7 +96,7 @@ while True:
             break
 
     # Setting the max FPS
-    dt = clock.tick(30)
+    dt = clock.tick(1000)
     # The blit function is called on the screen object
     # (first parameter - what we want blited, second parameter - pixel pos)
     # Blitting is putting something on the screen - in this case we are visualizing the background
@@ -101,14 +104,6 @@ while True:
     screen.blit(background, [0, 0])
     screen.blit(line, [line_x, line_y])
     # Returns the time in milliseconds since pygame was initialized
-    '''
-    start = pygame.time.get_ticks()
-    # Calculating delta time
-    delta_time = (start - last_frame) / 1000
-    # Changing last frame to the actual last frame, so we can calculate again in the next frame
-    last_frame = start
-    # if statement that makes the walls disappearing after they reach a certain position
-    '''
 
     if obstacle_number == 0 and not obs_changed:
         # Left
@@ -175,8 +170,9 @@ while True:
         pos_changex = - 0.07
         scale_changex /= 2
         obs_changed = True
-
-    #new_obstacle = pygame.time.get_ticks() - first_obstacle
+    elif obstacle_number > 9:
+        done = True
+        break
 
     if frame_no - frame_limit <= 0:
         screen.blit(wall, (walls[obstacle_number].new_wall_pos_x, walls[obstacle_number].new_wall_pos_y))
@@ -186,20 +182,23 @@ while True:
         walls[obstacle_number].x += int((scale_changex * speed_multiplier))
         walls[obstacle_number].y += int((scale_changey * speed_multiplier))
         speed_multiplier += 1
-        if walls[obstacle_number].new_wall_pos_y + walls[obstacle_number].y > line_y:
-            '''
-            wall_rect = wall.get_rect(center=(0, 0))
-            frame_rect = frame.get_rect(center=(0, 0))
+        if frame_no - frame_limit == -10:
+            print('check')
+
+            wall_rect = wall.get_rect(topleft=(walls[obstacle_number].new_wall_pos_x, walls[obstacle_number].new_wall_pos_y))
+            #print(wall_rect)
+            frame_rect = frame.get_rect(topleft=frame_pos)
+            #frame_rect.move(100, 100)
             wall_mask = pygame.mask.from_surface(wall)
+            #pygame.draw.polygon(screen, BLACK, wall_mask.outline(1))
             offset_x = wall_rect.x - frame_rect.x
             offset_y = wall_rect.y - frame_rect.y
-            hit = mask_ed.overlap(wall_mask, (offset_x, offset_y))
-            #hit = pygame.sprite.spritecollide(mask_ed, wall, False)
-            print(hit)
+            hit = frame_mask.overlap(wall_mask, (offset_x, offset_y))
             if hit:
                 obs_hit = True
-                print("hit")
-                '''
+                #pygame.draw.circle(screen, BLACK, hit, 20, 0)
+                print(hit)
+
     else:
         obstacle_number += 1
         speed_multiplier = 1
@@ -215,23 +214,46 @@ while True:
         else:
             obs_avoided += 1
 
-    frame_no += 1
 
 
-    frame = bs_class.main()
+
+    frame = ed_class.main()
     frame = pygame.surfarray.make_surface(frame)
     frame.convert_alpha()
     #frame = pygame.transform.smoothscale(frame, (1500, 1100))
     frame_x = frame.get_width()
     frame_y = frame.get_height()
     frame.set_colorkey((0, 0, 0))
-    mask_ed = pygame.mask.from_surface(frame)
-    screen.blit(frame, ((SCREEN_WIDTH - frame_x) / 2, (SCREEN_HEIGHT - frame_y) / 2 + 50))
-
+    frame_mask = pygame.mask.from_surface(frame)
+    #frame_mask.set_at(frame_pos, 1)
+    #pygame.draw.polygon(screen, BLACK, frame_mask.outline(1))
+    screen.blit(frame, frame_pos)
 
     # Rendering the FPS text
-    fps = font.render(str(int(clock.get_fps())), False, pygame.Color('white'))
+    fps = font.render(str(clock.get_fps()), False, pygame.Color('white'))
     screen.blit(fps, (50, 50))
+
+    total_fps += clock.get_fps()
+
+    frame_no += 1
     pygame.display.update()
 
-#pygame.quit()
+while done:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            break
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_ESCAPE:
+            break
+
+
+    screen.fill(BLACK)
+    avg_fps = total_fps / frame_no
+    avg_fps_text = end_font.render('avg FPS: ' + str(avg_fps), False, pygame.Color('white'))
+    avg_fps_text_rect = avg_fps_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3))
+    screen.blit(avg_fps_text, avg_fps_text_rect)
+    hitmiss_text = end_font.render('Hits: ' + str(num_obs_hit) + '       Misses: ' + str(obs_avoided), False, pygame.Color('white'))
+    hitmiss_text_rect = hitmiss_text.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+    screen.blit(hitmiss_text, hitmiss_text_rect)
+    pygame.display.update()
